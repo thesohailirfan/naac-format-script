@@ -12,6 +12,9 @@ import re
 
 path = "docs"
 dir_list = os.listdir(path)
+if len(dir_list) == 0:
+    print("No files found in docs directory")
+    exit()
 print(dir_list)
 
 # ========================================================

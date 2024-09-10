@@ -1,0 +1,2 @@
+mammoth==1.8.0
+selenium==4.23.0
