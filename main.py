@@ -68,10 +68,12 @@ for file in dir_list:
                 )
                 html += "<style>table, th, td {border: 1px solid black;border-collapse: collapse;}</style><br/><br/><table><tr><th>Course Code</th><th>Course Name</th><th>COs</th><th>PO1</th><th>PO2</th><th>PO3</th><th>PO4</th><th>PO5</th><th>PO6</th><th>PO7</th><th>PO8</th><th>PO9</th><th>PO10</th><th>PO11</th><th>PO12</th><th>PSO1</th><th>PSO2</th><th>PSO3</th></tr>"
                 avg = []
+                avg_count = []
                 pso_avg = []
 
                 for z in range(0, 12):
                     avg.append(0)
+                    avg_count.append(0)
 
                 for z in range(0, 3):
                     pso_avg.append(0)
@@ -90,6 +92,7 @@ for file in dir_list:
                             val = random.randint(1, 2)
                             html += f"<td>{val}</td>"
                             avg[j] = avg[j] + val
+                            avg_count[j] = avg_count[j] + 1
                         else:
                             html += "<td>-</td>"
 
@@ -101,7 +104,12 @@ for file in dir_list:
                     html += "</tr>"
 
                 html += f"<tr><td>CO{course_code_number}</td>"
-                avg_new = [round(x / (len(rows) - 2), 2) for x in avg]
+                avg_new = []
+                for t in range(len(avg)):
+                    val = 0
+                    if avg_count[t] > 0:
+                        val = round(avg[t] / avg_count[t], 2)
+                    avg_new.append(val)
                 pso_avg_new = [round(x / (len(rows) - 2), 2) for x in pso_avg]
 
                 for j in range(0, 12):
