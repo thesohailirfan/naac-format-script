@@ -114,7 +114,7 @@ for file in dir_list:
                         html += "<td>-</td>"
                 html += "</tr></table><br/><br/>"
 
-            # Write HTML String to file.html
+        # Write HTML String to file.html
         with open(f"output/{filename}.html", "w") as file:
             file.write(html)
 
