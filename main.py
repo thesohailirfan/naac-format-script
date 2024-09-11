@@ -27,7 +27,8 @@ for file in dir_list:
         # =============Convert to HTML====================
 
         f = open(f"docs/{file}", "rb")
-        filename = file.split(".")[0]
+        filename = file[:-5]
+        print("Converting - ", file)
         b = open(f"html/{filename}.html", "wb")
         document = mammoth.convert_to_html(f)
         b.write(document.value.encode("utf8"))
@@ -86,7 +87,8 @@ for file in dir_list:
                         html += f"<td rowspan='{len(rows)-1}'>{course_code}</td>"
                         html += f"<td rowspan='{len(rows)-1}'>{course_name}</td>"
                     html += f"<td>CO{course_code_number}.{i-1}</td>"
-                    pos = cols[2].text.split(", ")
+                    pos = cols[2].text.split(",")
+                    pos = [_.strip() for _ in pos]
                     for j in range(0, 12):
                         if f"PO{j+1}" in pos:
                             val = random.randint(1, 2)
