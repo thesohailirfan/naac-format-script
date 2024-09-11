@@ -87,11 +87,21 @@ for file in dir_list:
                         html += f"<td rowspan='{len(rows)-1}'>{course_code}</td>"
                         html += f"<td rowspan='{len(rows)-1}'>{course_name}</td>"
                     html += f"<td>CO{course_code_number}.{i-1}</td>"
-                    pos = cols[2].text.split(",")
+                    origin_pos = cols[2].text.split(",")
+                    origin_pos = [_.strip() for _ in origin_pos]
+                    pos = origin_pos + ["PO1", "PO2", "PO3", "PO4", "PO5", "PO6", "PO7", "PO9", "PO12"]
                     pos = [_.strip() for _ in pos]
+                    pos = list(set(pos))
+                    print(len(origin_pos), len(pos))
+                    print(origin_pos)
+                    print(pos)
                     for j in range(0, 12):
-                        if f"PO{j+1}" in pos:
-                            val = random.randint(1, 2)
+                        po = f"PO{j+1}"
+                        if po in pos:
+                            if po in origin_pos:
+                                val = random.randint(2, 3)
+                            else:
+                                val = random.randint(1, 3)
                             html += f"<td>{val}</td>"
                             avg[j] = avg[j] + val
                             avg_count[j] = avg_count[j] + 1
