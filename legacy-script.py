@@ -53,11 +53,20 @@ for file in dir_list:
         for p in range(len(tables)):
             table = tables[p]
             rows = table.find_elements(By.TAG_NAME, "tr")
-            if "Mapping between COs and POs".lower() in rows[0].text.lower():
+            if "Mapping between COs and POs 2".lower() in rows[0].text.lower():
                 table_next = tables[p + 1]
                 rows_next = table_next.find_elements(By.TAG_NAME, "tr")[
                     2
-                ].find_elements(By.TAG_NAME, "td")
+                ].find_elements(By.TAG_NAME, "p")
+                print(
+                    "Found Mapping",
+                    len(
+                        table_next.find_elements(By.TAG_NAME, "tr")[2].find_elements(
+                            By.TAG_NAME, "p"
+                        )
+                    ),
+                )
+
                 course_code = re.sub("[\s+]", "", rows_next[0].text)
                 course_code_number = course_code[3:]
                 course_name = rows_next[1].text
@@ -89,7 +98,17 @@ for file in dir_list:
                     html += f"<td>CO{course_code_number}.{i-1}</td>"
                     origin_pos = cols[2].text.split(",")
                     origin_pos = [_.strip() for _ in origin_pos]
-                    pos = origin_pos + ["PO1", "PO2", "PO3", "PO4", "PO5", "PO6", "PO7", "PO9", "PO12"]
+                    pos = origin_pos + [
+                        "PO1",
+                        "PO2",
+                        "PO3",
+                        "PO4",
+                        "PO5",
+                        "PO6",
+                        "PO7",
+                        "PO9",
+                        "PO12",
+                    ]
                     pos = [_.strip() for _ in pos]
                     pos = list(set(pos))
                     print(len(origin_pos), len(pos))
